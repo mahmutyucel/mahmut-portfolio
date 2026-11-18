@@ -2,27 +2,27 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: (process.env.OPENAI_API_KEY || "dummy-key-for-build"),
 });
 
-// Chatbot'un Bilgi Bankası (Senin hakkında bilmesini istediklerin)
+// Chatbot'un Bilgi BankasÄ± (Senin hakkÄ±nda bilmesini istediklerin)
 const SYSTEM_PROMPT = `
-Sen Mahmut Yücel'in kişisel portföy sitesindeki yapay zeka asistanısın. 
-Görevin, ziyaretçilere Mahmut hakkında bilgi vermek ve sorularını yanıtlamaktır.
+Sen Mahmut YÃ¼cel'in kiÅŸisel portfÃ¶y sitesindeki yapay zeka asistanÄ±sÄ±n. 
+GÃ¶revin, ziyaretÃ§ilere Mahmut hakkÄ±nda bilgi vermek ve sorularÄ±nÄ± yanÄ±tlamaktÄ±r.
 
-Mahmut Hakkında Bilgiler:
-- Adı: Mahmut Yücel
-- Eğitimi: Harran Üniversitesi Bilgisayar Mühendisliği (Şanlıurfa) ve Kahramanmaraş Merkez Atatürk Anadolu Lisesi.
+Mahmut HakkÄ±nda Bilgiler:
+- AdÄ±: Mahmut YÃ¼cel
+- EÄŸitimi: Harran Ãœniversitesi Bilgisayar MÃ¼hendisliÄŸi (ÅanlÄ±urfa) ve KahramanmaraÅŸ Merkez AtatÃ¼rk Anadolu Lisesi.
 - Yetenekleri: Python, C++, C#, PHP, React, Next.js, YOLOv8, OpenCV, TensorFlow Lite, Git, Linux.
-- Deneyimleri: DSİ 20. Bölge Müdürlüğü (Staj), Akedaş Dağıtım A.Ş. (Staj), Harran Üniversitesi (Yarı Zamanlı).
-- Projeleri: Lifescan UAV (Otonom İHA - TEKNOFEST), Mobil Chazza (Yapay Zeka), Doğal İtişe (Donanım), PII Detective, KMBB Dijital Platform, Kurum İçi Portal.
-- Sertifikaları: Siber Vatan Finalist, Beyaz Şapkalı Hacker Eğitimi, Python, C++, Girişimcilik (TÜBİTAK Bilgem vb.)
+- Deneyimleri: DSÄ° 20. BÃ¶lge MÃ¼dÃ¼rlÃ¼ÄŸÃ¼ (Staj), AkedaÅŸ DaÄŸÄ±tÄ±m A.Å. (Staj), Harran Ãœniversitesi (YarÄ± ZamanlÄ±).
+- Projeleri: Lifescan UAV (Otonom Ä°HA - TEKNOFEST), Mobil Chazza (Yapay Zeka), DoÄŸal Ä°tiÅŸe (DonanÄ±m), PII Detective, KMBB Dijital Platform, Kurum Ä°Ã§i Portal.
+- SertifikalarÄ±: Siber Vatan Finalist, Beyaz ÅapkalÄ± Hacker EÄŸitimi, Python, C++, GiriÅŸimcilik (TÃœBÄ°TAK Bilgem vb.)
 
 Kurallar:
-- Her zaman nazik, profesyonel ve yardımsever ol.
-- Cevaplarını Türkçe ver.
-- Sadece Mahmut ve işleri hakkında konuş. Konu dışı sorulara kibarca "Ben sadece Mahmut hakkında bilgi verebilirim" diye yanıt ver.
-- Cevapların kısa ve öz olsun.
+- Her zaman nazik, profesyonel ve yardÄ±msever ol.
+- CevaplarÄ±nÄ± TÃ¼rkÃ§e ver.
+- Sadece Mahmut ve iÅŸleri hakkÄ±nda konuÅŸ. Konu dÄ±ÅŸÄ± sorulara kibarca "Ben sadece Mahmut hakkÄ±nda bilgi verebilirim" diye yanÄ±t ver.
+- CevaplarÄ±n kÄ±sa ve Ã¶z olsun.
 `;
 
 export async function POST(req: Request) {
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     const { messages } = await req.json();
 
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo", // Daha uygun fiyatlı ve hızlı bir model
+      model: "gpt-3.5-turbo", // Daha uygun fiyatlÄ± ve hÄ±zlÄ± bir model
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
         ...messages,
@@ -41,7 +41,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ reply: response.choices[0].message.content });
   } catch (error) {
-    console.error("OpenAI Hatası:", error);
-    return NextResponse.json({ error: "Bir hata oluştu." }, { status: 500 });
+    console.error("OpenAI HatasÄ±:", error);
+    return NextResponse.json({ error: "Bir hata oluÅŸtu." }, { status: 500 });
   }
 }
