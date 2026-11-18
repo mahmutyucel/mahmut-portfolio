@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { prisma } from "@/lib/prisma";
 import ContactForm from "@/components/ContactForm";
 import ProfileCarousel from "@/components/ProfileCarousel";
@@ -41,20 +42,20 @@ export default async function Home() {
         <section className="section" id="hakkimda">
           <div className="wrap">
             <div className="section-head">
-              <span className="section-label">01 — Hakkımda</span>
-              <h2 className="section-title">Geçmişim ve <strong>yazılım serüvenim</strong>.</h2>
+              <span className="section-label">01 â€” HakkÄ±mda</span>
+              <h2 className="section-title">GeÃ§miÅŸim ve <strong>yazÄ±lÄ±m serÃ¼venim</strong>.</h2>
             </div>
             
             <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: "32px", alignItems: "center" }}>
               <div style={{ maxWidth: "650px" }}>
                 <p className="lead" style={{ whiteSpace: "pre-line", marginBottom: "16px" }}>
-                  Merhaba, ben Mahmut. Lise eğitimimi Kahramanmaraş Merkez Atatürk Anadolu Lisesi'nde tamamladım. Üniversite hayatıma ise Şanlıurfa'da, Harran Üniversitesi Bilgisayar Mühendisliği bölümünde devam ediyorum.
+                  Merhaba, ben Mahmut. Lise eÄŸitimimi KahramanmaraÅŸ Merkez AtatÃ¼rk Anadolu Lisesi'nde tamamladÄ±m. Ãœniversite hayatÄ±ma ise ÅanlÄ±urfa'da, Harran Ãœniversitesi Bilgisayar MÃ¼hendisliÄŸi bÃ¶lÃ¼mÃ¼nde devam ediyorum.
                 </p>
                 <p style={{ color: "var(--text-2)", fontSize: "15px", lineHeight: "1.7", marginBottom: "16px" }}>
-                  Yazılım geliştirme sürecinde sadece kod yazmaya değil, aynı zamanda bir problemi analiz edip ona sürdürülebilir bir çözüm üretmeye odaklanıyorum. TEKNOFEST gibi büyük organizasyonlarda yer alarak otonom İHA sistemleri, mobil uygulamalar ve yapay zekâ alanlarında takım çalışması ve proje yönetimi konularında deneyim kazandım.
+                  YazÄ±lÄ±m geliÅŸtirme sÃ¼recinde sadece kod yazmaya deÄŸil, aynÄ± zamanda bir problemi analiz edip ona sÃ¼rdÃ¼rÃ¼lebilir bir Ã§Ã¶zÃ¼m Ã¼retmeye odaklanÄ±yorum. TEKNOFEST gibi bÃ¼yÃ¼k organizasyonlarda yer alarak otonom Ä°HA sistemleri, mobil uygulamalar ve yapay zekÃ¢ alanlarÄ±nda takÄ±m Ã§alÄ±ÅŸmasÄ± ve proje yÃ¶netimi konularÄ±nda deneyim kazandÄ±m.
                 </p>
                 <p style={{ color: "var(--text-2)", fontSize: "15px", lineHeight: "1.7" }}>
-                  Yeni teknolojileri öğrenmeyi ve öğrendiklerimi gerçek dünya problemlerine uygulamayı seviyorum. Boş zamanlarımda siber güvenlik pratikleri yapıyor, açık kaynak projeleri inceliyor ve yazılım mimarileri üzerine araştırmalar yapıyorum.
+                  Yeni teknolojileri Ã¶ÄŸrenmeyi ve Ã¶ÄŸrendiklerimi gerÃ§ek dÃ¼nya problemlerine uygulamayÄ± seviyorum. BoÅŸ zamanlarÄ±mda siber gÃ¼venlik pratikleri yapÄ±yor, aÃ§Ä±k kaynak projeleri inceliyor ve yazÄ±lÄ±m mimarileri Ã¼zerine araÅŸtÄ±rmalar yapÄ±yorum.
                 </p>
               </div>
               
@@ -63,17 +64,17 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* 02 - DENEYİM (STAJLAR) */}
+        {/* 02 - DENEYÄ°M (STAJLAR) */}
         <section className="section" id="deneyim">
           <div className="wrap">
             <div className="section-head">
-              <span className="section-label">02 — Deneyim</span>
-              <h2 className="section-title">İş ve <strong>staj deneyimlerim</strong>.</h2>
+              <span className="section-label">02 â€” Deneyim</span>
+              <h2 className="section-title">Ä°ÅŸ ve <strong>staj deneyimlerim</strong>.</h2>
             </div>
             <div className="about-grid">
               <span />
               
-              {/* GÜNCELLENEN KISIM: Boşluklar alındı, sıkıştırıldı */}
+              {/* GÃœNCELLENEN KISIM: BoÅŸluklar alÄ±ndÄ±, sÄ±kÄ±ÅŸtÄ±rÄ±ldÄ± */}
               <div className="experience-grid">
                 {experiences.map((exp) => (
                   <div key={exp.id} className="experience-card" style={{ display: "flex", alignItems: "center", gap: "16px", padding: "16px" }}>
@@ -101,8 +102,8 @@ export default async function Home() {
         <section className="section" id="projeler">
           <div className="wrap">
             <div className="section-head">
-              <span className="section-label">03 — Projeler</span>
-              <h2 className="section-title">Üzerinde çalıştığım <strong>seçili projeler</strong>.</h2>
+              <span className="section-label">03 â€” Projeler</span>
+              <h2 className="section-title">Ãœzerinde Ã§alÄ±ÅŸtÄ±ÄŸÄ±m <strong>seÃ§ili projeler</strong>.</h2>
             </div>
             <div className="projects-grid">
               {projects.map((p) => (
@@ -112,28 +113,28 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* 04 - YETKİNLİKLER & SERTİFİKALAR */}
+        {/* 04 - YETKÄ°NLÄ°KLER & SERTÄ°FÄ°KALAR */}
         <section className="section" id="yetkinlikler">
           <div className="wrap">
             <div className="section-head">
-              <span className="section-label">04 — Yetkinlikler</span>
-              <h2 className="section-title">Teknik <strong>becerilerim ve sertifikalarım</strong>.</h2>
+              <span className="section-label">04 â€” Yetkinlikler</span>
+              <h2 className="section-title">Teknik <strong>becerilerim ve sertifikalarÄ±m</strong>.</h2>
             </div>
 
             <div style={{ marginBottom: "48px" }}>
-              <span className="section-label" style={{ display: "block", marginBottom: "16px", color: "var(--text)" }}>TEKNİK BECERİLER</span>
+              <span className="section-label" style={{ display: "block", marginBottom: "16px", color: "var(--text)" }}>TEKNÄ°K BECERÄ°LER</span>
               <div className="skills-grid">
                 {skills.map((skillGroup) => (
                   <div key={skillGroup.id} className="skill-card">
                     <strong>{skillGroup.category}</strong>
-                    <span>{skillGroup.items.replace(/,/g, " · ")}</span>
+                    <span>{skillGroup.items.replace(/,/g, " Â· ")}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             <div>
-              <span className="section-label" style={{ display: "block", marginBottom: "16px", color: "var(--text)" }}>SERTİFİKALAR</span>
+              <span className="section-label" style={{ display: "block", marginBottom: "16px", color: "var(--text)" }}>SERTÄ°FÄ°KALAR</span>
               <div className="certificates-grid">
                 {Object.entries(groupedCertificates).map(([issuerName, data]) => (
                   <div key={issuerName} style={{ background: "var(--bg)", border: "1px solid var(--line)" }}>
@@ -147,7 +148,7 @@ export default async function Home() {
                       {data.certs.map((cert) => (
                         <div key={cert.id} className="cert-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", borderBottom: "1px solid var(--line)", transition: "background 0.2s" }}>
                           <span className="cert-name" style={{ fontSize: "12px", color: "var(--text)" }}>{cert.name}</span>
-                          <a href="#" style={{ color: "var(--red)", display: "flex", alignItems: "center" }} title="Sertifikayı Görüntüle">
+                          <a href="#" style={{ color: "var(--red)", display: "flex", alignItems: "center" }} title="SertifikayÄ± GÃ¶rÃ¼ntÃ¼le">
                             <ArrowUpRight size={12} />
                           </a>
                         </div>
@@ -161,7 +162,7 @@ export default async function Home() {
         </section>
       </div>
 
-      {/* SİYAH FOOTER */}
+      {/* SÄ°YAH FOOTER */}
       <footer id="iletisim" style={{ background: "#161616", color: "#f4f4f4", paddingTop: "20px", paddingBottom: "12px" }}>
         <div className="wrap">
           
@@ -169,14 +170,14 @@ export default async function Home() {
             
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
               <h3 className="footer-name" style={{ fontFamily: "'Lora', serif", fontSize: "48px", fontWeight: "700", color: "#ffffff", margin: 0, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
-                MAHMUT <br /> YÜCEL
+                MAHMUT <br /> YÃœCEL
               </h3>
             </div>
 
             <div className="footer-col">
-              <h4 style={{ fontSize: "18px", fontWeight: "600", color: "#ffffff", marginBottom: "12px" }}>Keşfet</h4>
+              <h4 style={{ fontSize: "18px", fontWeight: "600", color: "#ffffff", marginBottom: "12px" }}>KeÅŸfet</h4>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
-                <li><a href="#hakkimda" style={{ fontSize: "17px", color: "#c6c6c6" }} className="footer-link">Hakkımda</a></li>
+                <li><a href="#hakkimda" style={{ fontSize: "17px", color: "#c6c6c6" }} className="footer-link">HakkÄ±mda</a></li>
                 <li><a href="#deneyim" style={{ fontSize: "17px", color: "#c6c6c6" }} className="footer-link">Deneyimler</a></li>
                 <li><a href="#projeler" style={{ fontSize: "17px", color: "#c6c6c6" }} className="footer-link">Projeler</a></li>
                 <li><a href="#yetkinlikler" style={{ fontSize: "17px", color: "#c6c6c6" }} className="footer-link">Yetkinlikler</a></li>
@@ -196,15 +197,15 @@ export default async function Home() {
           </div>
 
           <div className="footer-form-container">
-            <h4 style={{ fontSize: "18px", fontWeight: "600", color: "#ffffff", marginBottom: "12px" }}>Bana Ulaşın</h4>
+            <h4 style={{ fontSize: "18px", fontWeight: "600", color: "#ffffff", marginBottom: "12px" }}>Bana UlaÅŸÄ±n</h4>
             <div style={{ background: "#262626", padding: "12px", borderRadius: "4px" }}>
               <ContactForm isDark={true} />
             </div>
           </div>
 
           <div style={{ borderTop: "1px solid #393939", paddingTop: "10px", marginTop: "20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
-            <span style={{ fontSize: "13px", color: "#c6c6c6" }}>© {new Date().getFullYear()} Mahmut Yücel</span>
-            <a href="#top" style={{ fontSize: "13px", color: "#c6c6c6", display: "flex", alignItems: "center", gap: "6px" }} className="footer-link">Başa dön ↑</a>
+            <span style={{ fontSize: "13px", color: "#c6c6c6" }}>Â© {new Date().getFullYear()} Mahmut YÃ¼cel</span>
+            <a href="#top" style={{ fontSize: "13px", color: "#c6c6c6", display: "flex", alignItems: "center", gap: "6px" }} className="footer-link">BaÅŸa dÃ¶n â†‘</a>
           </div>
         </div>
       </footer>
