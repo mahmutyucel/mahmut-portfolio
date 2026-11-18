@@ -13,6 +13,7 @@
     "@prisma/client": "^7.10.1",
     "lucide-react": "^0.468.0",
     "next": "16.4.4",
+    "openai": "^7.59.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
