@@ -15,39 +15,89 @@ export default function Header() {
 
   return (
     <>
+      <style>{`
+        .header-inner {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          position: relative;
+          height: 100%;
+          padding: 0 40px;
+        }
+        .header-nav-desktop {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          gap: 32px;
+          height: 100%;
+          align-items: center;
+        }
+        .header-ataturk {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          padding: 8px 0;
+        }
+        .header-ataturk img {
+          height: 80px;
+          width: auto;
+          object-fit: contain;
+        }
+        .header-right-group {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+        @media (max-width: 900px) {
+          .header-inner {
+            padding: 0 16px;
+          }
+          .header-nav-desktop {
+            display: none !important;
+          }
+          .header-ataturk img {
+            height: 52px;
+          }
+          .brand {
+            font-size: 18px !important;
+          }
+        }
+      `}</style>
+
       <header className="site-header">
-        <div className="wrap" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", position: "relative", height: "100%" }}>
-          
-          <a className="brand" href="#top" style={{ marginLeft: "40px" }}>Mahmut YÜCEL</a>
-          
-          <nav className="nav-desktop" style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", display: "flex", gap: "32px", height: "100%", alignItems: "center" }}>
+        <div className="wrap header-inner">
+          <a className="brand" href="#top">Mahmut YÜCEL</a>
+
+          <nav className="nav-desktop header-nav-desktop">
             {navLinks.map((link) => (
               <a key={link.href} href={link.href} style={{ height: "100%" }}>{link.label}</a>
             ))}
           </nav>
 
-          <div style={{ marginRight: "40px", display: "flex", alignItems: "center", height: "100%", padding: "10px 0" }}>
-            <img src="/images/atatürk.jpeg" alt="Mustafa Kemal Atatürk" style={{ height: "85px", width: "auto", objectFit: "contain" }} />
-          </div>
+          <div className="header-right-group">
+            <div className="header-ataturk">
+              <img src="/images/ataturk.jpeg" alt="Mustafa Kemal Atatürk" onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/images/atatürk.jpeg"; }} />
+            </div>
 
-          {/* Mobil Hamburger Menü Butonu */}
-          <button 
-            className="menu-toggle" 
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menüyü Aç/Kapat"
-          >
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+            <button
+              className="menu-toggle"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Menüyü Aç/Kapat"
+            >
+              {menuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* Mobil Menü */}
       {menuOpen && (
         <nav className="mobile-nav">
           {navLinks.map((link) => (
-            <a 
-              key={link.href} 
-              href={link.href} 
+            <a
+              key={link.href}
+              href={link.href}
               onClick={() => setMenuOpen(false)}
             >
               {link.label}

@@ -46,7 +46,7 @@ export default async function Home() {
               <h2 className="section-title">Geçmişim ve <strong>yazılım serüvenim</strong>.</h2>
             </div>
             
-            <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: "32px", alignItems: "center" }}>
+            <div className="about-grid">
               <div style={{ maxWidth: "650px" }}>
                 <p className="lead" style={{ whiteSpace: "pre-line", marginBottom: "16px" }}>
                   Merhaba, ben Mahmut. Lise eğitimimi Kahramanmaraş Merkez Atatürk Anadolu Lisesi'nde tamamladım. Üniversite hayatıma ise Şanlıurfa'da, Harran Üniversitesi Bilgisayar Mühendisliği bölümünde devam ediyorum.
