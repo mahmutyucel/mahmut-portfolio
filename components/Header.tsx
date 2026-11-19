@@ -26,8 +26,8 @@ export default function Header() {
             ))}
           </nav>
 
-          <div style={{ marginRight: "40px", display: "flex", alignItems: "center", height: "100%", padding: "10px 0" }}>
-            <img src="/images/atatürk.jpeg" alt="Mustafa Kemal Atatürk" style={{ height: "85px", width: "auto", objectFit: "contain" }} />
+          <div style={{ marginRight: "40px", display: "flex", alignItems: "center", height: "100%", padding: "0" }}>
+            <img src="/images/atatürk.jpeg" alt="Mustafa Kemal Atatürk" style={{ height: "65px", maxHeight: "100%", width: "auto", objectFit: "contain" }} />
           </div>
 
           {/* Mobil Hamburger Menü Butonu */}
