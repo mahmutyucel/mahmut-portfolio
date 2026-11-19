@@ -13,11 +13,10 @@ function hydrateRow(row: any) {
   return out
 }
 
-function getBackupRows(modelName: string): any[] {
+function getRawTable(name: string): any[] {
   const data = (backupData || {}) as Record<string, any[]>
-  const key = modelName.toLowerCase()
+  const key = name.toLowerCase()
   let rows: any[] = []
-
   if (Array.isArray(data[key])) rows = data[key]
   else if (Array.isArray(data[key + 's'])) rows = data[key + 's']
   else if (key.endsWith('y') && Array.isArray(data[key.slice(0, -1) + 'ies'])) rows = data[key.slice(0, -1) + 'ies']
@@ -25,8 +24,26 @@ function getBackupRows(modelName: string): any[] {
     const match = Object.keys(data).find(k => k.toLowerCase().includes(key) || key.includes(k.toLowerCase()))
     if (match && Array.isArray(data[match])) rows = data[match]
   }
-
   return rows.map(hydrateRow)
+}
+
+function attachRelations(modelName: string, rows: any[]): any[] {
+  const m = modelName.toLowerCase()
+  if (m === 'issuer' || m === 'issuers') {
+    const certs = getRawTable('certificate')
+    return rows.map(issuer => ({
+      ...issuer,
+      certificates: certs.filter(c => c.issuerId === issuer.id)
+    }))
+  }
+  if (m === 'certificate' || m === 'certificates') {
+    const issuers = getRawTable('issuer')
+    return rows.map(cert => ({
+      ...cert,
+      issuer: issuers.find(i => i.id === cert.issuerId) || null
+    }))
+  }
+  return rows
 }
 
 export const prisma: PrismaClient = new Proxy({} as any, {
@@ -38,7 +55,7 @@ export const prisma: PrismaClient = new Proxy({} as any, {
       get(_mTarget, method: string | symbol) {
         const methodName = String(method)
         return async (args?: any) => {
-          let rows = getBackupRows(modelName)
+          let rows = attachRelations(modelName, getRawTable(modelName))
 
           if (args?.where && typeof args.where === 'object') {
             rows = rows.filter(r =>

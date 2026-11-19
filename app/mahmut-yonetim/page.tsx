@@ -22,7 +22,7 @@ export default async function AdminPage({ searchParams }: Props) {
           </div>
           <form action={login} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             <input name="username" placeholder="Kullanıcı Adı" required style={{ padding: "12px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
-            <input name="password" type="password" placeholder="Åifre" required style={{ padding: "12px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
+            <input name="password" type="password" placeholder="Şifre" required style={{ padding: "12px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
             {error && <div style={{ color: "#da1e28", fontSize: "13px" }}>{errors[error]}</div>}
             <button type="submit" className="btn-primary" style={{ justifyContent: "space-between" }}>Giriş Yap <ArrowRight size={16} /></button>
           </form>

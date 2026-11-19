@@ -49,7 +49,7 @@ export default async function Home() {
             <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: "32px", alignItems: "center" }}>
               <div style={{ maxWidth: "650px" }}>
                 <p className="lead" style={{ whiteSpace: "pre-line", marginBottom: "16px" }}>
-                  Merhaba, ben Mahmut. Lise eğitimimi Kahramanmaraş Merkez Atatürk Anadolu Lisesi'nde tamamladım. Üniversite hayatıma ise Åanlıurfa'da, Harran Üniversitesi Bilgisayar Mühendisliği bölümünde devam ediyorum.
+                  Merhaba, ben Mahmut. Lise eğitimimi Kahramanmaraş Merkez Atatürk Anadolu Lisesi'nde tamamladım. Üniversite hayatıma ise Şanlıurfa'da, Harran Üniversitesi Bilgisayar Mühendisliği bölümünde devam ediyorum.
                 </p>
                 <p style={{ color: "var(--text-2)", fontSize: "15px", lineHeight: "1.7", marginBottom: "16px" }}>
                   Yazılım geliştirme sürecinde sadece kod yazmaya değil, aynı zamanda bir problemi analiz edip ona sürdürülebilir bir çözüm üretmeye odaklanıyorum. TEKNOFEST gibi büyük organizasyonlarda yer alarak otonom İHA sistemleri, mobil uygulamalar ve yapay zekÃ¢ alanlarında takım çalışması ve proje yönetimi konularında deneyim kazandım.
