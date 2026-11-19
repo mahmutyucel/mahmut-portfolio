@@ -189,8 +189,8 @@ export default async function Home() {
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
                 <li><a href="https://www.linkedin.com/in/mahmut-y%C3%BCcel-8606ab236/" target="_blank" style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "17px", color: "#c6c6c6" }} className="footer-link"><FaLinkedin size={20} color="#0A66C2" /> @mahmutyucel</a></li>
                 <li><a href="https://github.com/mahmutyucel" target="_blank" style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "17px", color: "#c6c6c6" }} className="footer-link"><FaGithub size={20} color="#ffffff" /> @mahmutyucel</a></li>
-                <li><a href="https://instagram.com/mahmutyucel____" target="_blank" style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "17px", color: "#c6c6c6" }} className="footer-link"><FaInstagram size={20} color="#E1306C" /> @mahmutyucel</a></li>
-                <li><a href="#sosyal" onClick={(e) => e.preventDefault()} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "17px", color: "#c6c6c6" }} className="footer-link"><FaXTwitter size={20} color="#ffffff" /> @mahmutyucel</a></li>
+                <li><a href="https://instagram.com/mahmutyucel______" target="_blank" style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "17px", color: "#c6c6c6" }} className="footer-link"><FaInstagram size={20} color="#E1306C" /> @mahmutyucel</a></li>
+                <li><a href="#x-hesabi" style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "17px", color: "#c6c6c6" }} className="footer-link"><FaXTwitter size={20} color="#ffffff" /> @mahmutyucel</a></li>
               </ul>
             </div>
 
