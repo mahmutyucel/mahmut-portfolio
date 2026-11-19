@@ -5,41 +5,47 @@ import path from 'path'
 
 const globalForPrisma = globalThis as unknown as { prisma: any }
 
-function resolveDbPath(): string {
-  if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
-    const tmpDb = '/tmp/dev.db'
-    const candidates = [
-      path.join(process.cwd(), 'prisma', 'dev.db'),
-      path.join(process.cwd(), 'dev.db')
-    ]
-    for (const src of candidates) {
-      if (fs.existsSync(src)) {
-        try {
-          if (!fs.existsSync(tmpDb) || fs.statSync(tmpDb).size === 0) {
-            fs.copyFileSync(src, tmpDb)
-          }
-        } catch {}
-        return fs.existsSync(tmpDb) ? tmpDb : src
-      }
-    }
-    return tmpDb
+function findSourceDb(): string | null {
+  const candidates = [
+    path.join(process.cwd(), 'prisma', 'dev.db'),
+    path.join(process.cwd(), 'dev.db'),
+    path.resolve('prisma/dev.db'),
+    path.resolve('dev.db')
+  ]
+  for (const c of candidates) {
+    if (fs.existsSync(c) && fs.statSync(c).size > 0) return c
   }
-  return (process.env.DATABASE_URL || 'file:./dev.db').replace(/^file:/, '')
+  return null
 }
 
-function getClient() {
-  if (globalForPrisma.prisma) return globalForPrisma.prisma
-
-  try {
-    const dbPath = resolveDbPath()
-    if (!fs.existsSync(dbPath)) return null
-
-    const adapter = new PrismaBetterSqlite3({ url: `file:${dbPath}` })
-    globalForPrisma.prisma = new PrismaClient({ adapter })
-    return globalForPrisma.prisma
-  } catch {
-    return null
+function getDbFilePath(): string {
+  const src = findSourceDb()
+  if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
+    const tmpDb = '/tmp/dev.db'
+    if (src && (!fs.existsSync(tmpDb) || fs.statSync(tmpDb).size === 0)) {
+      try { fs.copyFileSync(src, tmpDb) } catch {}
+    }
+    if (fs.existsSync(tmpDb) && fs.statSync(tmpDb).size > 0) return tmpDb
+    if (src) return src
   }
+  return src || (process.env.DATABASE_URL || 'file:./dev.db').replace(/^file:/, '')
+}
+
+function initClient() {
+  if (globalForPrisma.prisma) return globalForPrisma.prisma
+  const dbPath = getDbFilePath()
+  if (!fs.existsSync(dbPath)) return null
+
+  // PrismaBetterSqlite3 surumune gore hem plain path hem file: URL formatini dene
+  for (const urlOpt of [dbPath, `file:${dbPath}`]) {
+    try {
+      const adapter = new PrismaBetterSqlite3({ url: urlOpt })
+      const client = new PrismaClient({ adapter })
+      globalForPrisma.prisma = client
+      return client
+    } catch {}
+  }
+  return null
 }
 
 export const prisma: PrismaClient = new Proxy({} as any, {
@@ -48,17 +54,14 @@ export const prisma: PrismaClient = new Proxy({} as any, {
       get(_mTarget, method: string | symbol) {
         return async (...args: any[]) => {
           try {
-            const client = getClient()
+            const client = initClient()
             if (!client || !client[prop] || typeof client[prop][method] !== 'function') {
-              if (method === 'findMany') return []
-              if (method === 'count') return 0
-              return null
+              return method === 'findMany' ? [] : method === 'count' ? 0 : null
             }
             return await client[prop][method](...args)
-          } catch {
-            if (method === 'findMany') return []
-            if (method === 'count') return 0
-            return null
+          } catch (e) {
+            console.error('Prisma query error:', e)
+            return method === 'findMany' ? [] : method === 'count' ? 0 : null
           }
         }
       }
