@@ -1,0 +1,162 @@
+{
+  "profile": [
+    {
+      "id": 1,
+      "bio": "Merhaba, ben Mahmut. Lise eğitimimi Kahramanmaraş Merkez Atatürk Anadolu Lisesi'nde tamamladım. Üniversite hayatıma ise Şanlıurfa'da, Harran Üniversitesi Bilgisayar Mühendisliği bölümünde devam ediyorum. TEKNOFEST gibi organizasyonlarda yer alarak otonom İHA sistemleri, mobil uygulamalar ve yapay zekâ alanlarında projeler geliştirdim."
+    }
+  ],
+  "experience": [
+    {
+      "id": 1,
+      "title": "Stajyer",
+      "company": "DSİ 20. Bölge Müdürlüğü",
+      "type": "Staj",
+      "logo": "/logos/dsi.png"
+    },
+    {
+      "id": 2,
+      "title": "Stajyer",
+      "company": "Akedaş Dağıtım A.Ş.",
+      "type": "Staj",
+      "logo": "/logos/akedas.png"
+    },
+    {
+      "id": 3,
+      "title": "Yazılım",
+      "company": "Harran Üniversitesi / Belli Kültür Spor Derneği",
+      "type": "Yarı Zamanlı",
+      "logo": "/logos/harran.png"
+    }
+  ],
+  "project": [
+    {
+      "id": 1,
+      "number": "01",
+      "category": "İHA / Otonom Sistemler",
+      "title": "Lifescan UAV",
+      "description": "Otonom uçuş, görüntü işleme ve yapay zekâ kullanarak afet sonrası enkaz altındaki canlıları tespit etmek için geliştirilen otonom İHA projesi.",
+      "tags": "Python,YOLOv8,Jetson Nano,MAVLink,OpenCV"
+    },
+    {
+      "id": 2,
+      "number": "02",
+      "category": "Mobil Uygulama",
+      "title": "Mobil Chazza",
+      "description": "Kişiyi doğrudan ve dolaylı tanımlayan verileri kullanarak çalışan, mobil cihaz üzerinde çevrimdışı çalışan yapay zekâ modeli.",
+      "tags": "Android,TensorFlow Lite,Python,NLP"
+    },
+    {
+      "id": 3,
+      "number": "03",
+      "category": "Donanım",
+      "title": "Doğal İtişe",
+      "description": "İnsan gücüyle hareket eden mekanik bir jeneratör. Günlük hayatta kullanılabilecek taşınabilir bir enerji üretim sistemi.",
+      "tags": "Donanım,Mekanik,Enerji"
+    },
+    {
+      "id": 4,
+      "number": "04",
+      "category": "Android / Yapay Zekâ",
+      "title": "PII Detective",
+      "description": "Mobil cihaz üzerinde OCR ve yapay zekâ destekli kişisel veri tespiti ve dinamik maskeleme yaklaşımı.",
+      "tags": "Android,OCR,DistilBERT,Python"
+    },
+    {
+      "id": 5,
+      "number": "05",
+      "category": "Web / Kamu",
+      "title": "KMBB Dijital Platform",
+      "description": "Modern arayüz, erişilebilirlik ve kullanıcı deneyimi odağında geliştirilen belediye dijital platformu.",
+      "tags": "Next.js,TypeScript,CSS"
+    },
+    {
+      "id": 6,
+      "number": "06",
+      "category": "Web / Yönetim",
+      "title": "Kurum İçi Portal",
+      "description": "Duyuru, kullanıcı ve içerik yönetimi süreçlerini tek noktada birleştiren PHP tabanlı portal çalışması.",
+      "tags": "PHP,MySQL,Bootstrap"
+    }
+  ],
+  "skill": [
+    {
+      "id": 1,
+      "category": "Programlama Dilleri",
+      "items": "C,C++,Python,C#,PHP"
+    },
+    {
+      "id": 2,
+      "category": "Web & Veritabanı",
+      "items": "HTML,CSS,JavaScript,MySQL,SQL"
+    },
+    {
+      "id": 3,
+      "category": "Yapay Zekâ",
+      "items": "YOLOv8,OpenCV,TensorFlow Lite"
+    },
+    {
+      "id": 4,
+      "category": "Araçlar",
+      "items": "Git,Linux,Jetson Nano,MAVLink"
+    }
+  ],
+  "issuer": [
+    {
+      "id": 3,
+      "name": "Savunma Sanayi Başkanlığı ",
+      "logo": "/images/ssb.png"
+    },
+    {
+      "id": 4,
+      "name": "Bilgi Teknolojileri Kurumu",
+      "logo": "/images/btk.png"
+    },
+    {
+      "id": 5,
+      "name": "Tübitak",
+      "logo": "/images/tübitak.png"
+    }
+  ],
+  "certificate": [
+    {
+      "id": 5,
+      "name": "Siber Vatan Finalist",
+      "issuerId": 3
+    },
+    {
+      "id": 6,
+      "name": "Oyun Geliştirme",
+      "issuerId": 4
+    },
+    {
+      "id": 7,
+      "name": "Doğal Dil İşlemeye Giriş",
+      "issuerId": 4
+    },
+    {
+      "id": 8,
+      "name": "Unity ile Oyun Geliştirme",
+      "issuerId": 4
+    },
+    {
+      "id": 9,
+      "name": "İşletim Sistemlerine Giriş",
+      "issuerId": 4
+    },
+    {
+      "id": 10,
+      "name": "C Programlama",
+      "issuerId": 4
+    },
+    {
+      "id": 11,
+      "name": "Mülakat Teknikleri",
+      "issuerId": 4
+    },
+    {
+      "id": 12,
+      "name": "Araştırma Verileri Yönetimi",
+      "issuerId": 5
+    }
+  ]
+}
