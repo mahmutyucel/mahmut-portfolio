@@ -1,64 +1,73 @@
 import { PrismaClient } from '@prisma/client'
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
-import fs from 'fs'
-import path from 'path'
 import backupData from '../data/db-backup.json'
 
-const globalForPrisma = globalThis as unknown as { prisma: any }
-
-function getBackupRows(modelName: string): any[] {
-  const data = backupData as Record<string, any[]>
-  const key = modelName.toLowerCase()
-  if (data[key]) return data[key]
-  if (data[key + 's']) return data[key + 's']
-  if (key.endsWith('y') && data[key.slice(0, -1) + 'ies']) return data[key.slice(0, -1) + 'ies']
-  const match = Object.keys(data).find(k => k.includes(key) || key.includes(k))
-  return match ? data[match] : []
+function hydrateRow(row: any) {
+  if (!row || typeof row !== 'object') return row
+  const out: any = { ...row }
+  for (const [k, v] of Object.entries(out)) {
+    if (typeof v === 'string' && (/At$|Date$|Tarih/i.test(k) || /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(v))) {
+      const d = new Date(v)
+      if (!isNaN(d.getTime())) out[k] = d
+    }
+  }
+  return out
 }
 
-function getClient() {
-  if (globalForPrisma.prisma) return globalForPrisma.prisma
-  const candidates = [
-    path.join(process.cwd(), 'prisma', 'dev.db'),
-    path.join(process.cwd(), 'dev.db'),
-    '/tmp/dev.db'
-  ]
-  const dbPath = candidates.find(p => fs.existsSync(p) && fs.statSync(p).size > 0)
-  if (!dbPath) return null
+function getBackupRows(modelName: string): any[] {
+  const data = (backupData || {}) as Record<string, any[]>
+  const key = modelName.toLowerCase()
+  let rows: any[] = []
 
-  for (const urlOpt of [dbPath, `file:${dbPath}`]) {
-    try {
-      const adapter = new PrismaBetterSqlite3({ url: urlOpt })
-      const client = new PrismaClient({ adapter })
-      globalForPrisma.prisma = client
-      return client
-    } catch {}
+  if (Array.isArray(data[key])) rows = data[key]
+  else if (Array.isArray(data[key + 's'])) rows = data[key + 's']
+  else if (key.endsWith('y') && Array.isArray(data[key.slice(0, -1) + 'ies'])) rows = data[key.slice(0, -1) + 'ies']
+  else {
+    const match = Object.keys(data).find(k => k.toLowerCase().includes(key) || key.includes(k.toLowerCase()))
+    if (match && Array.isArray(data[match])) rows = data[match]
   }
-  return null
+
+  return rows.map(hydrateRow)
 }
 
 export const prisma: PrismaClient = new Proxy({} as any, {
   get(_target, prop: string | symbol) {
     const modelName = String(prop)
+    if (modelName.startsWith('$') || modelName === 'then') return undefined
+
     return new Proxy(() => {}, {
       get(_mTarget, method: string | symbol) {
         const methodName = String(method)
-        return async (...args: any[]) => {
-          try {
-            const client = getClient()
-            if (client && client[modelName] && typeof client[modelName][methodName] === 'function') {
-              const res = await client[modelName][methodName](...args)
-              if (Array.isArray(res) && res.length > 0) return res
-              if (!Array.isArray(res) && res !== null && res !== 0) return res
-            }
-          } catch {}
+        return async (args?: any) => {
+          let rows = getBackupRows(modelName)
 
-          // Veritabani bos veya erisilemezse doğrudan yedek JSON'dan verileri dondur
-          const rows = getBackupRows(modelName)
+          if (args?.where && typeof args.where === 'object') {
+            rows = rows.filter(r =>
+              Object.entries(args.where).every(([wk, wv]) => wv === undefined || r[wk] === wv)
+            )
+          }
+
+          if (args?.orderBy && typeof args.orderBy === 'object') {
+            const entries = Array.isArray(args.orderBy) ? args.orderBy : [args.orderBy]
+            for (const ord of entries.reverse()) {
+              const [ok, dir] = Object.entries(ord)[0] || []
+              if (ok) {
+                rows = [...rows].sort((a, b) => {
+                  if (a[ok] < b[ok]) return dir === 'desc' ? 1 : -1
+                  if (a[ok] > b[ok]) return dir === 'desc' ? -1 : 1
+                  return 0
+                })
+              }
+            }
+          }
+
+          if (args?.take && typeof args.take === 'number') {
+            rows = rows.slice(0, args.take)
+          }
+
           if (methodName === 'findMany') return rows
           if (methodName === 'findFirst' || methodName === 'findUnique') return rows[0] || null
           if (methodName === 'count') return rows.length
-          return null
+          return rows[0] || null
         }
       }
     })
