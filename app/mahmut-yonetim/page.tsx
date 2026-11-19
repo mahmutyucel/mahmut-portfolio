@@ -12,19 +12,19 @@ export default async function AdminPage({ searchParams }: Props) {
   const editId = edit ? Number(edit) : null;
 
   if (!authenticated) {
-    const errors: Record<string, string> = { invalid: "HatalÄ± giriÅŸ.", empty: "BoÅŸ alan.", config: "Sunucu hatasÄ±." };
+    const errors: Record<string, string> = { invalid: "Hatalı giriş.", empty: "Boş alan.", config: "Sunucu hatası." };
     return (
       <main style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--bg-alt)", padding: "24px" }}>
         <div style={{ width: "100%", maxWidth: "420px", background: "var(--bg)", border: "1px solid var(--line)", padding: "40px" }}>
           <div style={{ marginBottom: "32px" }}>
             <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "48px", height: "48px", background: "var(--accent)", color: "#fff", marginBottom: "16px" }}><Lock size={24} /></div>
-            <h1 style={{ fontSize: "24px", fontWeight: "600", margin: "0 0 8px 0" }}>YÃ¶netici GiriÅŸi</h1>
+            <h1 style={{ fontSize: "24px", fontWeight: "600", margin: "0 0 8px 0" }}>Yönetici Girişi</h1>
           </div>
           <form action={login} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            <input name="username" placeholder="KullanÄ±cÄ± AdÄ±" required style={{ padding: "12px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
+            <input name="username" placeholder="Kullanıcı Adı" required style={{ padding: "12px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
             <input name="password" type="password" placeholder="Åifre" required style={{ padding: "12px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
             {error && <div style={{ color: "#da1e28", fontSize: "13px" }}>{errors[error]}</div>}
-            <button type="submit" className="btn-primary" style={{ justifyContent: "space-between" }}>GiriÅŸ Yap <ArrowRight size={16} /></button>
+            <button type="submit" className="btn-primary" style={{ justifyContent: "space-between" }}>Giriş Yap <ArrowRight size={16} /></button>
           </form>
         </div>
       </main>
@@ -41,7 +41,7 @@ export default async function AdminPage({ searchParams }: Props) {
   const getEditData = (list: any[]) => list.find(item => item.id === editId) || {};
 
   const tabs = [
-    { id: "profile", label: "HakkÄ±mda" },
+    { id: "profile", label: "Hakkımda" },
     { id: "experience", label: "Deneyimler" },
     { id: "project", label: "Projeler" },
     { id: "skill", label: "Yetenekler" },
@@ -52,10 +52,10 @@ export default async function AdminPage({ searchParams }: Props) {
     <main style={{ minHeight: "100vh", background: "var(--bg-alt)" }}>
       <header style={{ background: "var(--bg)", borderBottom: "1px solid var(--line)", height: "64px", display: "flex", alignItems: "center" }}>
         <div className="wrap" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", padding: "0 40px" }}>
-          <span style={{ fontWeight: "600", fontSize: "16px" }}>YÃ¶netim Paneli</span>
+          <span style={{ fontWeight: "600", fontSize: "16px" }}>Yönetim Paneli</span>
           <div style={{ display: "flex", gap: "20px" }}>
-            <a href="/" target="_blank" style={{ fontSize: "13px", color: "var(--accent)" }}>Siteyi GÃ¶rÃ¼ntÃ¼le â†—</a>
-            <form action={logout}><button type="submit" style={{ display: "flex", gap: "6px", fontSize: "13px", color: "var(--text-2)" }}><LogOut size={14} /> Ã‡Ä±kÄ±ÅŸ</button></form>
+            <a href="/" target="_blank" style={{ fontSize: "13px", color: "var(--accent)" }}>Siteyi Görüntüle â†—</a>
+            <form action={logout}><button type="submit" style={{ display: "flex", gap: "6px", fontSize: "13px", color: "var(--text-2)" }}><LogOut size={14} /> Çıkış</button></form>
           </div>
         </div>
       </header>
@@ -76,7 +76,7 @@ export default async function AdminPage({ searchParams }: Props) {
           
           {tab === "profile" && profile && (
             <>
-              <h2 style={{ fontSize: "18px", marginBottom: "24px" }}>HakkÄ±mda</h2>
+              <h2 style={{ fontSize: "18px", marginBottom: "24px" }}>Hakkımda</h2>
               <form action={updateProfile} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                 <input type="hidden" name="id" value={profile.id} />
                 <textarea name="bio" defaultValue={profile.bio} rows={10} style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
@@ -87,40 +87,40 @@ export default async function AdminPage({ searchParams }: Props) {
 
           {tab === "experience" && (
             <>
-              <h2 style={{ fontSize: "18px", marginBottom: "24px" }}>{editId ? "Deneyim DÃ¼zenle" : "Deneyim Ekle"}</h2>
+              <h2 style={{ fontSize: "18px", marginBottom: "24px" }}>{editId ? "Deneyim Düzenle" : "Deneyim Ekle"}</h2>
               <form action={saveExperience} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                 {editId && <input type="hidden" name="id" value={editId} />}
-                <input name="title" defaultValue={getEditData(experiences).title} placeholder="Ãœnvan" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
+                <input name="title" defaultValue={getEditData(experiences).title} placeholder="Ünvan" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
                 <input name="company" defaultValue={getEditData(experiences).company} placeholder="Kurum" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
-                <input name="type" defaultValue={getEditData(experiences).type} placeholder="TÃ¼r" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
+                <input name="type" defaultValue={getEditData(experiences).type} placeholder="Tür" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
                 <input name="logo" defaultValue={getEditData(experiences).logo} placeholder="Logo Yolu" style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
-                <button type="submit" className="btn-primary">{editId ? <><Save size={16} /> GÃ¼ncelle</> : <><Plus size={16} /> Ekle</>}</button>
+                <button type="submit" className="btn-primary">{editId ? <><Save size={16} /> Güncelle</> : <><Plus size={16} /> Ekle</>}</button>
               </form>
             </>
           )}
 
           {tab === "project" && (
             <>
-              <h2 style={{ fontSize: "18px", marginBottom: "24px" }}>{editId ? "Proje DÃ¼zenle" : "Proje Ekle"}</h2>
+              <h2 style={{ fontSize: "18px", marginBottom: "24px" }}>{editId ? "Proje Düzenle" : "Proje Ekle"}</h2>
               <form action={saveProject} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                 {editId && <input type="hidden" name="id" value={editId} />}
-                <input name="title" defaultValue={getEditData(projects).title} placeholder="Proje AdÄ±" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
+                <input name="title" defaultValue={getEditData(projects).title} placeholder="Proje Adı" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
                 <input name="category" defaultValue={getEditData(projects).category} placeholder="Kategori" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
-                <textarea name="description" defaultValue={getEditData(projects).description} placeholder="AÃ§Ä±klama" required rows={3} style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
+                <textarea name="description" defaultValue={getEditData(projects).description} placeholder="Açıklama" required rows={3} style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
                 <input name="tags" defaultValue={getEditData(projects).tags} placeholder="Etiketler" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
-                <button type="submit" className="btn-primary">{editId ? <><Save size={16} /> GÃ¼ncelle</> : <><Plus size={16} /> Ekle</>}</button>
+                <button type="submit" className="btn-primary">{editId ? <><Save size={16} /> Güncelle</> : <><Plus size={16} /> Ekle</>}</button>
               </form>
             </>
           )}
 
           {tab === "skill" && (
             <>
-              <h2 style={{ fontSize: "18px", marginBottom: "24px" }}>{editId ? "Yetenek DÃ¼zenle" : "Yetenek Ekle"}</h2>
+              <h2 style={{ fontSize: "18px", marginBottom: "24px" }}>{editId ? "Yetenek Düzenle" : "Yetenek Ekle"}</h2>
               <form action={saveSkill} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                 {editId && <input type="hidden" name="id" value={editId} />}
                 <input name="category" defaultValue={getEditData(skills).category} placeholder="Kategori" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
-                <input name="items" defaultValue={getEditData(skills).items} placeholder="Yetenekler (VirgÃ¼lle)" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
-                <button type="submit" className="btn-primary">{editId ? <><Save size={16} /> GÃ¼ncelle</> : <><Plus size={16} /> Ekle</>}</button>
+                <input name="items" defaultValue={getEditData(skills).items} placeholder="Yetenekler (Virgülle)" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
+                <button type="submit" className="btn-primary">{editId ? <><Save size={16} /> Güncelle</> : <><Plus size={16} /> Ekle</>}</button>
               </form>
             </>
           )}
@@ -128,25 +128,25 @@ export default async function AdminPage({ searchParams }: Props) {
           {tab === "certificate" && (
             <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
               <div>
-                <h2 style={{ fontSize: "18px", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}><Building2 size={20} /> {editId && getEditData(issuers).name ? "Kurum DÃ¼zenle" : "Kurum Ekle"}</h2>
+                <h2 style={{ fontSize: "18px", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}><Building2 size={20} /> {editId && getEditData(issuers).name ? "Kurum Düzenle" : "Kurum Ekle"}</h2>
                 <form action={saveIssuer} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                   {editId && getEditData(issuers).name && <input type="hidden" name="id" value={editId} />}
-                  <input name="name" defaultValue={getEditData(issuers).name} placeholder="Kurum AdÄ±" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
+                  <input name="name" defaultValue={getEditData(issuers).name} placeholder="Kurum Adı" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
                   <input name="logo" defaultValue={getEditData(issuers).logo} placeholder="Logo Yolu" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
-                  <button type="submit" className="btn-primary">{editId && getEditData(issuers).name ? <><Save size={16} /> GÃ¼ncelle</> : <><Plus size={16} /> Kurum Ekle</>}</button>
+                  <button type="submit" className="btn-primary">{editId && getEditData(issuers).name ? <><Save size={16} /> Güncelle</> : <><Plus size={16} /> Kurum Ekle</>}</button>
                 </form>
               </div>
               <hr style={{ border: "0", borderTop: "1px solid var(--line)" }} />
               <div>
-                <h2 style={{ fontSize: "18px", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}><Award size={20} /> {editId && getEditData(certificates).name ? "Sertifika DÃ¼zenle" : "Sertifika Ekle"}</h2>
+                <h2 style={{ fontSize: "18px", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}><Award size={20} /> {editId && getEditData(certificates).name ? "Sertifika Düzenle" : "Sertifika Ekle"}</h2>
                 <form action={saveCertificate} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                   {editId && getEditData(certificates).name && <input type="hidden" name="id" value={editId} />}
-                  <input name="name" defaultValue={getEditData(certificates).name} placeholder="Sertifika AdÄ±" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
+                  <input name="name" defaultValue={getEditData(certificates).name} placeholder="Sertifika Adı" required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }} />
                   <select name="issuerId" defaultValue={getEditData(certificates).issuerId} required style={{ padding: "10px", background: "var(--bg-alt)", border: "1px solid var(--line)" }}>
-                    <option value="">Bir Kurum SeÃ§in</option>
+                    <option value="">Bir Kurum Seçin</option>
                     {issuers.map(i => <option key={i.id} value={i.id}>{i.name}</option>)}
                   </select>
-                  <button type="submit" className="btn-primary">{editId && getEditData(certificates).name ? <><Save size={16} /> GÃ¼ncelle</> : <><Plus size={16} /> Sertifika Ekle</>}</button>
+                  <button type="submit" className="btn-primary">{editId && getEditData(certificates).name ? <><Save size={16} /> Güncelle</> : <><Plus size={16} /> Sertifika Ekle</>}</button>
                 </form>
               </div>
             </div>
@@ -155,7 +155,7 @@ export default async function AdminPage({ searchParams }: Props) {
         </div>
 
         <div style={{ background: "var(--bg)", border: "1px solid var(--line)", padding: "32px" }}>
-          <h2 style={{ fontSize: "18px", marginBottom: "24px" }}>Mevcut KayÄ±tlar</h2>
+          <h2 style={{ fontSize: "18px", marginBottom: "24px" }}>Mevcut Kayıtlar</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "var(--line)", border: "1px solid var(--line)" }}>
             
             {tab === "profile" && profile && (

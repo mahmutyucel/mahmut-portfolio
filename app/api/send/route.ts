@@ -15,10 +15,10 @@ export async function POST(request: Request) {
     const data = await resend.emails.send({
       from: "Portfoy Iletisim <onboarding@resend.dev>",
       to: ["mahmutyucel866@gmail.com"],
-      subject: `PortfÃƒÂ¶y Ã„Â°letiÃ…Å¸im: ${subject}`,
+      subject: `PortfÃƒ¶y Ã„°letiÃ…Å¸im: ${subject}`,
       html: `
-        <h3>Yeni MesajÃ„Â±nÃ„Â±z Var</h3>
-        <p><strong>GÃƒÂ¶nderen Mail:</strong> ${email || "Belirtilmedi"}</p>
+        <h3>Yeni MesajÃ„±nÃ„±z Var</h3>
+        <p><strong>GÃƒ¶nderen Mail:</strong> ${email || "Belirtilmedi"}</p>
         <p><strong>Konu:</strong> ${subject}</p>
         <p><strong>Mesaj:</strong></p>
         <p style="white-space: pre-wrap;">${message}</p>
@@ -28,6 +28,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, data });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Mail gÃƒÂ¶nderilemedi." }, { status: 500 });
+    return NextResponse.json({ error: "Mail gÃƒ¶nderilemedi." }, { status: 500 });
   }
 }
